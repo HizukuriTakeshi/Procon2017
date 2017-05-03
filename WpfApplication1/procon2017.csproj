@@ -77,7 +77,6 @@
     <Compile Include="Gamesystem\FieldObject.cs" />
     <Compile Include="Gamesystem\GameManager.cs" />
     <Compile Include="Gamesystem\GameState.cs" />
-    <Compile Include="Gamesystem\ProtoTypeUI.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

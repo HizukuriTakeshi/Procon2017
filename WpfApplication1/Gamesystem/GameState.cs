@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Prototype.GameInformation;
@@ -9,9 +9,9 @@ namespace Prototype.GameSystem
     /// <summary>
     /// 処理のための拡張した盤面を表すクラス
     /// </summary>
-    public class GameState 
+    public class GameState
     {
-        
+
         #region  [パブリック変数]
         /// <summary>
         /// ボード上のオブジェクト情報
@@ -28,6 +28,9 @@ namespace Prototype.GameSystem
         private List<Ghost> p1GhostList = new List<Ghost>();
         private List<Ghost> p2GhostList = new List<Ghost>();
 
+        private List<Ghost> p1GhostGetList = new List<Ghost>();
+        private List<Ghost> p2GhostGetList = new List<Ghost>();
+
         //protected int maxTurn;
         public Move currentPlayerMove = null;
         public FieldObject currentPlayer = FieldObject.P1;
@@ -35,6 +38,7 @@ namespace Prototype.GameSystem
 
         private const int THINKTIME = 500;
         private int turnNum = 0;
+        private FieldObject winner = FieldObject.blank;
 
         #endregion
 
@@ -99,6 +103,30 @@ namespace Prototype.GameSystem
             }
         }
 
+        public List<Ghost> P1GhostGetList
+        {
+            get
+            {
+                return p1GhostGetList;
+            }
+            set
+            {
+                p1GhostGetList = value;
+            }
+        }
+
+        public List<Ghost> P2GhostGetList
+        {
+            get
+            {
+                return p2GhostGetList;
+            }
+            set
+            {
+                p2GhostGetList = value;
+            }
+        }
+
         public Move CurrentPlayerMove
         {
             get { return this.currentPlayerMove; }
@@ -122,6 +150,12 @@ namespace Prototype.GameSystem
         {
             get { return this.turnNum; }
             set { this.turnNum = value; }
+        }
+
+        public FieldObject Winner
+        {
+            get { return this.winner; }
+            set { this.winner = value; }
         }
 
 
@@ -417,31 +451,53 @@ namespace Prototype.GameSystem
             {
                 cloned.M_Board = (FieldObject[,])this.M_Board.Clone();
             }
-            if(this.boardState!=null){
+            if (this.boardState != null)
+            {
                 cloned.BoardState = (FieldObject[,])this.BoardState.Clone();
             }
 
             if (this.P1ghostList != null)
+            {
+                List<Ghost> tmp = new List<Ghost>();
+                foreach (Ghost g in this.P1ghostList)
                 {
-                List<Ghost> tmp = new List<Ghost>();   
-                foreach(Ghost g in this.P1ghostList)
-                {
-                    tmp.Add(g.Clone());   
+                    tmp.Add(g.Clone());
                 }
                 cloned.P1ghostList = tmp;
-                }
+            }
 
             if (this.P2ghostList != null)
             {
 
-                List<Ghost> tmp = new List<Ghost>();   
-                foreach(Ghost g in this.P2ghostList)
+                List<Ghost> tmp = new List<Ghost>();
+                foreach (Ghost g in this.P2ghostList)
                 {
-                    tmp.Add(g.Clone());   
+                    tmp.Add(g.Clone());
                 }
                 cloned.P2ghostList = tmp;
+            }
+
+            if (this.P1GhostGetList != null)
+            {
+
+                List<Ghost> tmp = new List<Ghost>();
+                foreach (Ghost g in this.P1GhostGetList)
+                {
+                    tmp.Add(g.Clone());
                 }
-			
+                cloned.P1GhostGetList = tmp;
+            }
+
+            if (this.P2GhostGetList != null)
+            {
+
+                List<Ghost> tmp = new List<Ghost>();
+                foreach (Ghost g in this.P2GhostGetList)
+                {
+                    tmp.Add(g.Clone());
+                }
+                cloned.P2GhostGetList = tmp;
+            }
             return cloned;
         }
 

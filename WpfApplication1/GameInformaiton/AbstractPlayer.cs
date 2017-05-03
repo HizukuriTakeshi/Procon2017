@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Prototype.GameSystem;
+using System.Diagnostics;
 
 namespace Prototype.GameInformation
 {
@@ -98,7 +99,7 @@ namespace Prototype.GameInformation
         }
 
         /// <summary>
-        /// 盤面上のゴーストの位置を取得する
+        /// 盤面の状態を取得する
         /// </summary>
         /// <returns></returns>
         public FieldObject[,] GetBoardState()
@@ -140,7 +141,7 @@ namespace Prototype.GameInformation
         }
 
         /// <summary>
-        /// 指定した属性のゴーストのリストを取得
+        /// 指定した属性のGhostのリストを取得
         /// </summary>
         /// <param name="ga"></param>
         /// <returns></returns>
@@ -160,7 +161,7 @@ namespace Prototype.GameInformation
         }
 
        /// <summary>
-       /// 指定した属性のゴーストの数を取得
+       /// 指定した属性のゴーストの数を取得する
        /// </summary>
        /// <param name="ga"></param>
        /// <returns></returns>
@@ -189,6 +190,11 @@ namespace Prototype.GameInformation
             return num;
         }
 
+        /// <summary>
+        /// 指定したプレイヤーのゴーストのポジションのリストを取得する
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public List<Position> GetGhostPositionList(FieldObject player)
         {
             List<Position> plist = new List<Position>();
@@ -212,7 +218,23 @@ namespace Prototype.GameInformation
 
         }
 
+        public List<Ghost> GetCaputuredGhostList()
+        {
+            if (gameState.currentPlayer.Equals(FieldObject.P1))
+            {
+                Debug.WriteLine("Capture P1");
+                return gameState.P1GhostGetList;
+            }
+            else
+           if (gameState.currentPlayer.Equals(FieldObject.P2))
+            {
+                Debug.WriteLine("Capture P2");
+                return gameState.P2GhostGetList;
+            }
 
+            return null;
+
+        }
 
         /// <summary>
         /// ゴーストの初期配置を設定するメソッド

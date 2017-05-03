@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Prototype.GameSystem;
+using System.Diagnostics;
 
 namespace Prototype.GameInformation
 {
@@ -56,7 +57,7 @@ namespace Prototype.GameInformation
 
             }
 
-			//Console.CursorLeft = 0;
+            //Console.CursorLeft = 0;
             //for (int i = 0; i < GetBoardState().GetLength(0);i++)
             //{
             //    for (int j = 0; j < GetBoardState().GetLength(1);j++)
@@ -65,13 +66,18 @@ namespace Prototype.GameInformation
             //    }
             //    Console.WriteLine();
             //}
+            foreach (Ghost g in GetCaputuredGhostList())
+            {
+                Debug.WriteLine(">>>" + g.Gt);
+            }
 
-             return m;
+            return m;
         }
 
         private Boolean IsMovable(Position p, GhostMove gm)
         {
-            if(Exists(p))
+
+            if (Exists(p))
             {
                 if (gm == GhostMove.Down)
                 {
@@ -127,12 +133,7 @@ namespace Prototype.GameInformation
 				}
 					return true;
             }
-
-
-
-
-
-            return false;
+               return false;
         }
 
         /// <summary>

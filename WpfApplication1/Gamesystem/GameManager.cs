@@ -303,9 +303,20 @@ namespace Prototype.GameSystem
 				g.P.X = g.P.X -1;
                 g.InitPos.X = g.InitPos.X - 1;
 			}
+            foreach (Ghost g in tmp.P1GhostGetList)
+            {
+                g.P.X = g.P.X - 1;
+                g.InitPos.X = g.InitPos.X - 1;
+            }
+            foreach (Ghost g in tmp.P2GhostGetList)
+            {
+                g.P.X = g.P.X - 1;
+                g.InitPos.X = g.InitPos.X - 1;
+            }
+
 
             //currentplayerが２Pならボードを反転
-            if(gamestate.currentPlayer.Equals(FieldObject.P2))
+            if (gamestate.currentPlayer.Equals(FieldObject.P2))
             {
                 tmp.BoardState = RotateClockwise(RotateClockwise(tmp.BoardState));
 
@@ -328,6 +339,23 @@ namespace Prototype.GameSystem
 					g.InitPos.X = 5 - g.InitPos.X;
 				//Console.WriteLine(g.P.X + " " + g.P.Y);
                 }
+                foreach (Ghost g in tmp.P1GhostGetList)
+                {
+                    g.P.X = 5 - g.P.X;
+                    g.P.Y = 5 - g.P.Y;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    //Console.WriteLine(g.P.X + " " + g.P.Y);
+                }
+                foreach (Ghost g in tmp.P2GhostGetList)
+                {
+                    g.P.X = 5 - g.P.X;
+                    g.P.Y = 5 - g.P.Y;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    //Console.WriteLine(g.P.X + " " + g.P.Y);
+                }
+
             }
                 return tmp;
         }
@@ -495,6 +523,7 @@ namespace Prototype.GameSystem
             {
                 Console.WriteLine("{0} {1}", gamestate.NotCurrentPlayer, gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good));
                 Console.WriteLine("{0} Good Ghost Get Win!", gamestate.currentPlayer);
+                gamestate.Winner = gamestate.currentPlayer;
                 return true;
             }
 
@@ -502,6 +531,7 @@ namespace Prototype.GameSystem
             if (gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.evil).Equals(0))
             {
                 Console.WriteLine("{0} Evil Ghost dosnt exis Win!", gamestate.NotCurrentPlayer);
+                gamestate.Winner = gamestate.NotCurrentPlayer;
                 return true;
             }
 
@@ -510,6 +540,7 @@ namespace Prototype.GameSystem
             if (gamestate.IsGhostAtExit(gamestate.currentPlayer))
             {
                 Console.WriteLine("{0} Ghost Exits Win!", gamestate.currentPlayer);
+                gamestate.Winner = gamestate.currentPlayer;
                 return true;
             }
             return false;
@@ -565,6 +596,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
                             if (_tmp >= 0)
                             {
+                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
                                 gamestate.P2ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X + 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -575,6 +607,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
                             if (_tmp >= 0)
                             {
+                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
                                 gamestate.P2ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -585,6 +618,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
                             if (_tmp >= 0)
                             {
+                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
                                 gamestate.P2ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -594,6 +628,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
                             if (_tmp >= 0)
                             {
+                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
                                 gamestate.P2ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -627,6 +662,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
                             if (_tmp >= 0)
                             {
+                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
                                 gamestate.P1ghostList.RemoveAt(_tmp);
 
                             }
@@ -638,6 +674,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
                             if (_tmp >= 0)
                             {
+                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
                                 gamestate.P1ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -648,6 +685,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
                             if (_tmp >= 0)
                             {
+                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
                                 gamestate.P1ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
@@ -657,6 +695,7 @@ namespace Prototype.GameSystem
                             _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
                             if (_tmp >= 0)
                             {
+                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
                                 gamestate.P1ghostList.RemoveAt(_tmp);
                             }
                             //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
