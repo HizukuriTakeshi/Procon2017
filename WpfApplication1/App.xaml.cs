@@ -5,10 +5,10 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Prototype.GameInformation;
-using Prototype.GameSystem;
+using Geister.GameInformation;
+using Geister.GameSystem;
 
-namespace ProconUi
+namespace Geister
 {
     /// <summary>
     /// App.xaml の相互作用ロジック
@@ -28,25 +28,25 @@ namespace ProconUi
             */
              
             App app = new App();
-            //app.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+            //app.StartupUri = new Uri("GeisterUI.xaml", UriKind.Relative);
 
             // 上記の選択肢によってwindowを切り替える場合、app.StartupUriを以下に書き換える。
             /*
             if (result == MessageBoxResult.Yes)
             {
-                app.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+                app.StartupUri = new Uri("GeisterUI.xaml", UriKind.Relative);
             }
             else
             {
-                app.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+                app.StartupUri = new Uri("GeisterUI.xaml", UriKind.Relative);
             }
             */
 
 
-            GameManager gameManager = new GameManager(new TestPlayer("a"), new TestPlayer("b"), 200, 200);
+            GameManager gameManager = new GameManager(new DebugPlayer("a"), new DebugPlayer("b"), 200, 20);
 
             app.InitializeComponent();
-            app.Run(new MainWindow(gameManager));
+            app.Run(new GeisterUI(gameManager));
         }
     }
 }

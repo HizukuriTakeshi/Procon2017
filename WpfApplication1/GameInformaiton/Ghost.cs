@@ -2,77 +2,43 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prototype.GameInformation
+namespace Geister.GameInformation
 {
 
-
+    /// <summary>
+    /// ゴーストの位置と属性を保持するクラス
+    /// </summary>
     public class Ghost
     {
-        #region [フィールド]
-        /// <summary>
-        /// ゴーストのタイプ
-        /// </summary>
-        private GhostAttribute gt;
-
-        private Position initP;
-        private Position p;
-
-        private int playerNumber;
-
-        #endregion
 
         #region [アクセサ]
+
         /// <summary>
-        /// ゴーストのタイプのアクセサ
+        /// ゴーストの属性
         /// </summary>
         public GhostAttribute Gt
         {
-            set
-            {
-                gt = value;
-            }
+            set;
 
-            get
-            {
-                return gt;
-            }
+            get;
         }
 
-        public int PlayerNumber
-        {
-            set
-            {
-                playerNumber = value;
-            }
-            get
-            {
-                return playerNumber;
-            }
-        }
-
+        /// <summary>
+        /// ゴーストの現在位置
+        /// </summary>
         public Position P
         {
-            get
-            {
-                return p;
-            }
-            set
-            {
-                p = value;
-            }
+            get;
+            set;
         }
 
+        /// <summary>
+        /// ゴーストの初期位置
+        /// </summary>
         public Position InitPos
         {
-            get
-            {
-                return initP;
-            }
-
-            set
-            {
-                initP = value;
-            }
+            get;
+            set;
         }
         #endregion
 
@@ -80,7 +46,12 @@ namespace Prototype.GameInformation
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="gt"></param>
+        /// <param name="gt">
+        /// ゴーストの属性
+        /// </param>
+        /// <param name="initPos">
+        /// ゴーストの初期位置
+        /// </param>
         public Ghost(GhostAttribute gt, Position initPos)
         {
             Gt = gt;
@@ -90,19 +61,19 @@ namespace Prototype.GameInformation
 
         public Ghost Clone()
         {
-			Ghost cloned = (Ghost)MemberwiseClone();
-			
-			if (this.InitPos != null)
-			{
+            Ghost cloned = (Ghost)MemberwiseClone();
+
+            if (this.InitPos != null)
+            {
                 cloned.InitPos = (Position)this.InitPos.Clone();
-			}
+            }
 
-			if (this.P != null)
-			{
-				cloned.P = (Position)this.P.Clone();
-			}
+            if (this.P != null)
+            {
+                cloned.P = (Position)this.P.Clone();
+            }
 
-			return cloned;
+            return cloned;
         }
 
         #endregion

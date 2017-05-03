@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prototype.GameInformation;
+using Geister.GameInformation;
 using System.Diagnostics;
 
-namespace Prototype.GameSystem
+namespace Geister.GameSystem
 {
     /// <summary>
     /// 処理のための拡張した盤面を表すクラス

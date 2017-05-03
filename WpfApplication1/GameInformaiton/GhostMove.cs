@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prototype.GameInformation
+namespace Geister.GameInformation
 {
     /// <summary>
     /// ゴーストの動かす方向を表す

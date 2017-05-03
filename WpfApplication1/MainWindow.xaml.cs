@@ -15,8 +15,8 @@ using System.Windows.Shapes;
 
 using System.Timers;
 using System.Windows.Threading;
-using Prototype.GameInformation;
-using Prototype.GameSystem;
+using Geister.GameInformation;
+using Geister.GameSystem;
 
 // hoppin参考
 /*
@@ -30,17 +30,17 @@ using System.Text;
 //using System.Windows.Forms;
 */
 
-namespace ProconUi
+namespace Geister
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// GeisterUI.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GeisterUI : Window
     {
         int modeflag = new int();
 
         // gameManager とりあえずコメントアウト
-         private GameManager gameManager;
+        private GameManager gameManager;
         private delegate void GameProcessDeligate();
 
         // 時間のカウント用？
@@ -49,7 +49,7 @@ namespace ProconUi
         DispatcherTimer dispatcherTimer;
 
         /*
-        public MainWindow()
+        public GeisterUI()
         {
             // gameが始まるとここにやってくる？
 
@@ -57,35 +57,35 @@ namespace ProconUi
             InitializeComponent();
         }
         */
-         
+
         // gameManager を引数にする場合のMainWindow?
-        
-        public MainWindow(GameManager gameManager)
+
+        public GeisterUI(GameManager gameManager)
         {
             modeflag = 0;
- 
+
             InitializeComponent();
             this.gameManager = gameManager;
 
             dispatcherTimer = new DispatcherTimer(DispatcherPriority.Normal);
 
             // Timespan 10ミリ秒
-            dispatcherTimer.Interval = new TimeSpan(0,0,0,0,10);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Start();
 
             GameProcessDeligate gameDelegate = new GameProcessDeligate(gameManager.ProcessGame);
-            IAsyncResult result = gameDelegate.BeginInvoke(null,null);
-            
+            IAsyncResult result = gameDelegate.BeginInvoke(null, null);
+
         }
-        
-         
+
+
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             count++;
-                
-            if(count == 10000) 
-                    count = 0;
+
+            if (count == 10000)
+                count = 0;
 
             // 要素の描画を無効にして、新しい完全なレイアウト パスを強制します。 レイアウト サイクルが完了した後に、OnRender が呼び出されます。
             InvalidateVisual();
@@ -96,11 +96,19 @@ namespace ProconUi
             base.OnRender(drawingContext);
 
             // 画面の描画を行う
-            if (gameManager != null) {
+            if (gameManager != null)
+            {
                 display(gameManager.gamestate.Board);
             }
             // tick確認用 使うときはコメントアウトすること
             //count1.Text = "count" + count;
+            count1.Text = "Player1: " + gameManager.P1.Name;
+            count4.Text = "Player2: " + gameManager.P2.Name;
+            if (gameManager.gamestate.Winner != FieldObject.blank)
+            {
+                Result.Text = gameManager.gamestate.Winner.ToString() + " Win!";
+
+            }
         }
 
         // テスト用ボタン1(モード切替)のクリック時処理の記述
@@ -123,7 +131,7 @@ namespace ProconUi
         // 開発途中用
         private void bt_test2_Click(object sender, RoutedEventArgs e)
         {
-            GhostType[,] test = new GhostType[6, 6] 
+            GhostType[,] test = new GhostType[6, 6]
             {{GhostType.Blank,GhostType.P2evil,GhostType.Blank,GhostType.P2evil,GhostType.Blank,GhostType.Blank},
             {GhostType.Blank,GhostType.Blank,GhostType.P2good,GhostType.Blank,GhostType.P2good,GhostType.Blank},
             {GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank},
@@ -137,7 +145,7 @@ namespace ProconUi
         // テスト用ボタン3(配置リセット)のクリック時処理の記述
         // 開発途中用
         private void bt_test3_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             //配置のリセットを行う
             reset();
         }
@@ -166,7 +174,7 @@ namespace ProconUi
             ghost28.Width = 50; ghost28.Height = 50;
 
             // 配置のリセットを行う
-            GhostType[,] reset = new GhostType[6, 6] 
+            GhostType[,] reset = new GhostType[6, 6]
             {{GhostType.Blank,GhostType.P2evil,GhostType.P2evil,GhostType.P2evil,GhostType.P2evil,GhostType.Blank},
             {GhostType.Blank,GhostType.P2good,GhostType.P2good,GhostType.P2good,GhostType.P2good,GhostType.Blank},
             {GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank},
@@ -180,7 +188,7 @@ namespace ProconUi
         // 盤面の配列を受け取って、その内容を表示する関数display
         private void display(GhostType[,] input)
         //private void display()
-        { 
+        {
             // 入力配列：例
             // 開発途中用(最終的にコメントアウトすること)
             /*
@@ -192,7 +200,7 @@ namespace ProconUi
             {GhostType.P2good,GhostType.Blank,GhostType.P1good,GhostType.Blank,GhostType.Blank,GhostType.Blank},
             {GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank,GhostType.Blank}};
             */
-             
+
             // ループ用変数
             int i = new int();
             int j = new int();
@@ -216,7 +224,7 @@ namespace ProconUi
                 statustext.Text = "p1evil OK";
             }
              */
-            
+
             // 配置確認ループ
             for (i = 0; i < 6; i++)
             {
@@ -306,7 +314,7 @@ namespace ProconUi
                         }
                         p2evil++;
                     }
- 
+
                 }
             }
 
@@ -316,120 +324,120 @@ namespace ProconUi
             set31(GhostType.P2evil, 4 - p2evil);
 
         }
-        
+
         //---以下ghost00を配置する為の関数set00(00 = 11~18, 21~28)---
         // マージン値x,yを受け取り、対応する座標に配置
 
         // ghost11(good)を配置する関数 set11
         private void set11(int x, int y)
         {
-                Thickness margin11 = new Thickness(x, y, 0, 0);
-                ghost11.Margin = margin11;
+            Thickness margin11 = new Thickness(x, y, 0, 0);
+            ghost11.Margin = margin11;
         }
 
         // ghost12(good)を配置する関数 set12
         private void set12(int x, int y)
-        { 
-                Thickness margin12 = new Thickness(x, y, 0, 0);
-                ghost12.Margin = margin12;
+        {
+            Thickness margin12 = new Thickness(x, y, 0, 0);
+            ghost12.Margin = margin12;
         }
 
         // ghost13(good)を配置する関数 set13
         private void set13(int x, int y)
         {
-                Thickness margin13 = new Thickness(x, y, 0, 0);
-                ghost13.Margin = margin13;
+            Thickness margin13 = new Thickness(x, y, 0, 0);
+            ghost13.Margin = margin13;
         }
 
         // ghost14(good)を配置する関数 set14
         private void set14(int x, int y)
         {
-                Thickness margin14 = new Thickness(x, y, 0, 0);
-                ghost14.Margin = margin14;
+            Thickness margin14 = new Thickness(x, y, 0, 0);
+            ghost14.Margin = margin14;
         }
 
         // ghost15(evil)を配置する関数 set15
         private void set15(int x, int y)
         {
-                Thickness margin15 = new Thickness(x, y, 0, 0);
-                ghost15.Margin = margin15;
+            Thickness margin15 = new Thickness(x, y, 0, 0);
+            ghost15.Margin = margin15;
         }
 
         // ghost16(evil)を配置する関数 set16
         private void set16(int x, int y)
         {
-                Thickness margin16 = new Thickness(x, y, 0, 0);
-                ghost16.Margin = margin16;
+            Thickness margin16 = new Thickness(x, y, 0, 0);
+            ghost16.Margin = margin16;
         }
 
         // ghost17(evil)を配置する関数 set17
         private void set17(int x, int y)
         {
-                Thickness margin17 = new Thickness(x, y, 0, 0);
-                ghost17.Margin = margin17;
+            Thickness margin17 = new Thickness(x, y, 0, 0);
+            ghost17.Margin = margin17;
         }
 
         // ghost18(evil)を配置する関数 set18
         private void set18(int x, int y)
         {
-                Thickness margin18 = new Thickness(x, y, 0, 0);
-                ghost18.Margin = margin18;
+            Thickness margin18 = new Thickness(x, y, 0, 0);
+            ghost18.Margin = margin18;
         }
 
         // ghost21(good)を配置する関数 set21
         private void set21(int x, int y)
         {
-                Thickness margin21 = new Thickness(x, y, 0, 0);
-                ghost21.Margin = margin21;
+            Thickness margin21 = new Thickness(x, y, 0, 0);
+            ghost21.Margin = margin21;
         }
 
         // ghost22(good)を配置する関数 set22
         private void set22(int x, int y)
         {
-                Thickness margin22 = new Thickness(x, y, 0, 0);
-                ghost22.Margin = margin22;
+            Thickness margin22 = new Thickness(x, y, 0, 0);
+            ghost22.Margin = margin22;
         }
 
         // ghost23(good)を配置する関数 set23
         private void set23(int x, int y)
         {
-                Thickness margin23 = new Thickness(x, y, 0, 0);
-                ghost23.Margin = margin23;
+            Thickness margin23 = new Thickness(x, y, 0, 0);
+            ghost23.Margin = margin23;
         }
 
         // ghost24(good)を配置する関数 set24
         private void set24(int x, int y)
         {
-                Thickness margin24 = new Thickness(x, y, 0, 0);
-                ghost24.Margin = margin24;
+            Thickness margin24 = new Thickness(x, y, 0, 0);
+            ghost24.Margin = margin24;
         }
 
         // ghost25(evil)を配置する関数 set25
         private void set25(int x, int y)
         {
-                Thickness margin25 = new Thickness(x, y, 0, 0);
-                ghost25.Margin = margin25;
+            Thickness margin25 = new Thickness(x, y, 0, 0);
+            ghost25.Margin = margin25;
         }
 
         // ghost26(evil)を配置する関数 set26
         private void set26(int x, int y)
         {
-                Thickness margin26 = new Thickness(x, y, 0, 0);
-                ghost26.Margin = margin26;
+            Thickness margin26 = new Thickness(x, y, 0, 0);
+            ghost26.Margin = margin26;
         }
 
         // ghost27(evil)を配置する関数 set27
         private void set27(int x, int y)
         {
-                Thickness margin27 = new Thickness(x, y, 0, 0);
-                ghost27.Margin = margin27;
+            Thickness margin27 = new Thickness(x, y, 0, 0);
+            ghost27.Margin = margin27;
         }
 
         // ghost28(evil)を配置する関数 set28
         private void set28(int x, int y)
         {
-                Thickness margin28 = new Thickness(x, y, 0, 0);
-                ghost28.Margin = margin28;
+            Thickness margin28 = new Thickness(x, y, 0, 0);
+            ghost28.Margin = margin28;
         }
 
         // --- 以下、余ったゴースト(GhostType:gt) n体を盤外に配置する関数 ---
@@ -441,7 +449,7 @@ namespace ProconUi
                 {
                     ghost14.Width = 30;
                     ghost14.Width = 30;
-                    set14(460,-120);
+                    set14(460, -120);
                 }
                 if (gt == GhostType.P1evil)
                 {

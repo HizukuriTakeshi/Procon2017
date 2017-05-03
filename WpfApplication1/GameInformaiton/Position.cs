@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prototype.GameInformation
+namespace Geister.GameInformation
 {
     /// <summary>
     /// 盤面上の位置を表すクラス
     /// </summary>
     public class Position
     {
-
         #region [フィールド]
         /// <summary>
         /// X座標
@@ -25,8 +24,12 @@ namespace Prototype.GameInformation
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="x">盤面のx座標</param>
-        /// <param name="y">盤面のy座標</param>
+        /// <param name="x">
+        /// 盤面のx座標
+        /// </param>
+        /// <param name="y">
+        /// 盤面のy座標
+        /// </param>
         public Position(int x, int y)
         {
             this.X = x;
@@ -38,8 +41,12 @@ namespace Prototype.GameInformation
         /// <summary>
         /// x,y座標を設定する
         /// </summary>
-        /// <param name="x">盤面のx座標</param>
-        /// <param name="y">盤面のy座標</param>
+        /// <param name="x">
+        /// 盤面のx座標
+        /// </param>
+        /// <param name="y">
+        /// 盤面のy座標
+        /// </param>
         public void SetPosition(int x, int y)
         {
             this.X = x;

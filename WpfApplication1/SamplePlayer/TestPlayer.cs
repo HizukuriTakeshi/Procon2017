@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Prototype.GameSystem;
+using Geister.GameSystem;
 using System.Diagnostics;
 
-namespace Prototype.GameInformation
+namespace Geister.GameInformation
 {
-    public class TestPlayer : AbstractPlayer
+    public class DebugPlayer : AbstractPlayer
     {
 
         FieldObject[,]  boardState;
 
-        public TestPlayer() : base()
+        public DebugPlayer() : base()
         {
             SetInitialPlacement(new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
                                                       { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good }}
@@ -20,7 +20,7 @@ namespace Prototype.GameInformation
 
         }
 
-        public TestPlayer(string name) : base()
+        public DebugPlayer(string name) : base()
         {
             this.name = name;
             SetInitialPlacement(new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },

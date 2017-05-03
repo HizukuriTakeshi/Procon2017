@@ -1,13 +1,13 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prototype.GameInformation;
-using Prototype.GameSystem;
+using Geister.GameInformation;
+using Geister.GameSystem;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Prototype.GameSystem
+namespace Geister.GameSystem
 {
     public class GameManager
     {
@@ -89,9 +89,6 @@ namespace Prototype.GameSystem
             FinalTurn = finalturn;
 
             //gamestate.NotCurrentPlayer = FieldObject.P2;
-
-            P1.PlayerNumber = 1;
-            P2.PlayerNumber = -1;
 
             playerList.Add(p1);
             playerList.Add(p2);
@@ -489,7 +486,7 @@ namespace Prototype.GameSystem
 					{
 						Debug.WriteLine(">>> Task end");
                         Debug.WriteLine(">>> {0}Turn {1}",gamestate.TurnNum,gamestate.currentPlayer);
-                        Debug.WriteLine(">>> {0} {1} {2}",gamestate.CurrentPlayerMove.Pos.X,gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.ghostM);
+                        Debug.WriteLine(">>> {0} {1} {2}",gamestate.CurrentPlayerMove.Pos.X,gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.GhostM);
 						isTaskTimeOut = false;
 						break;
 					}
