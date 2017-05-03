@@ -100,7 +100,7 @@ namespace ProconUi
                 display(gameManager.gamestate.Board);
             }
             // tick確認用 使うときはコメントアウトすること
-            count1.Text = "count" + count;
+            //count1.Text = "count" + count;
         }
 
         // テスト用ボタン1(モード切替)のクリック時処理の記述

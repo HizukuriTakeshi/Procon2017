@@ -65,14 +65,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameInformaiton\AbstractPlayer.cs" />
-    <Compile Include="GameInformaiton\Board.cs" />
     <Compile Include="GameInformaiton\Ghost.cs" />
     <Compile Include="GameInformaiton\GhostAttribute.cs" />
     <Compile Include="GameInformaiton\GhostMove.cs" />
     <Compile Include="GameInformaiton\GhostType.cs" />
     <Compile Include="GameInformaiton\Move.cs" />
     <Compile Include="GameInformaiton\Position.cs" />
-    <Compile Include="GameInformaiton\Square.cs" />
+    <Compile Include="Gamesystem\Square.cs" />
     <Compile Include="GameInformaiton\TestPlayer.cs" />
     <Compile Include="Gamesystem\FieldObject.cs" />
     <Compile Include="Gamesystem\GameManager.cs" />

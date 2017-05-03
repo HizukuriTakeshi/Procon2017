@@ -257,7 +257,7 @@ namespace Prototype.GameSystem
                 //DisplayVirtualBoard();
                 //DisplayBoard();
                 //Console.CursorLeft = 0;
-				DisplayBoardState();
+				//DisplayBoardState();
 
 
 
@@ -521,7 +521,7 @@ namespace Prototype.GameSystem
             //Console.WriteLine("good_{0} {1}", gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good), gamestate.NotCurrentPlayer);
             if (gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good).Equals(0))
             {
-                Console.WriteLine("{0} {1}", gamestate.NotCurrentPlayer, gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good));
+                //Console.WriteLine("{0} {1}", gamestate.NotCurrentPlayer, gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good));
                 Console.WriteLine("{0} Good Ghost Get Win!", gamestate.currentPlayer);
                 gamestate.Winner = gamestate.currentPlayer;
                 return true;
@@ -563,7 +563,7 @@ namespace Prototype.GameSystem
                 //TurnPlayer = FieldObject.P2;
                 //gamestate.NotCurrentPlayer = FieldObject.P1;
             }
-            Console.WriteLine("Turn{0} {1}", gamestate.TurnNum, gamestate.currentPlayer);
+            //Console.WriteLine("Turn{0} {1}", gamestate.TurnNum, gamestate.currentPlayer);
 
         }
         #endregion
@@ -828,7 +828,7 @@ namespace Prototype.GameSystem
                         //移動先に自分のゴーストがいないか
                         if (!GhostExists(new Position(m.Pos.X + 1, m.Pos.Y)))
                         {
-                            Debug.WriteLine("Can move");
+                            //Debug.WriteLine("Can move");
                             return true;
                         }
                     }
@@ -844,7 +844,7 @@ namespace Prototype.GameSystem
                         //移動先に自分のゴーストがいないか
                         if (!GhostExists(new Position(m.Pos.X, m.Pos.Y - 1)))
                         {
-                            Debug.WriteLine("Can move");
+                            //Debug.WriteLine("Can move");
                             return true;
                         }
                     }
@@ -860,7 +860,7 @@ namespace Prototype.GameSystem
                         //移動先に自分のゴーストがいないか
                         if (!GhostExists(new Position(m.Pos.X, m.Pos.Y + 1)))
                         {
-                            Debug.WriteLine("Can move");
+                            //Debug.WriteLine("Can move");
                             return true;
                         }
                     }
@@ -876,7 +876,7 @@ namespace Prototype.GameSystem
                         //移動先に自分のゴーストがいないか
                         if (!GhostExists(new Position(m.Pos.X - 1, m.Pos.Y)))
                         {
-                            Debug.WriteLine("Can move");
+                            //Debug.WriteLine("Can move");
                             return true;
                         }
                     }
@@ -905,7 +905,7 @@ namespace Prototype.GameSystem
                     return true;
                 }
             }
-            Debug.WriteLine("Ghost not exist:{0} {1}", p.X, p.Y);
+            //Debug.WriteLine("Ghost not exist:{0} {1}", p.X, p.Y);
             return false;
         }
 

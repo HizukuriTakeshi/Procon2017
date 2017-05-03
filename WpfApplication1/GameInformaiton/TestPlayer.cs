@@ -66,10 +66,10 @@ namespace Prototype.GameInformation
             //    }
             //    Console.WriteLine();
             //}
-            foreach (Ghost g in GetCaputuredGhostList())
-            {
-                Debug.WriteLine(">>>" + g.Gt);
-            }
+            //foreach (Ghost g in GetCaputuredGhostList())
+            //{
+            //    Debug.WriteLine(">>>" + g.Gt);
+            //}
 
             return m;
         }
