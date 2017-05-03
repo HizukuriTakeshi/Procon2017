@@ -1,0 +1,101 @@
+﻿<Window x:Class="ProconUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="600">
+    <Grid>
+        <Image Name="p1goodmaster" Width="100" Height="100" Source="Image/ghost_1p_def.png"/>
+        <Image Name="p1evilmaster" Width="100" Height="100" Source="Image/ghost_1p_evil.png"/>
+        <Image Name="p2goodmaster" Width="100" Height="100" Source="Image/ghost_2p_def.png"/>
+        <Image Name="p2evilmaster" Width="100" Height="100" Source="Image/ghost_2p_evil.png"/>
+
+        <Grid Name="gamebourd" Height="400" Width="380" Background="Gray" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">
+            <Image Name="exit1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60" Margin="-300,-380,0,0" Source="image/exit_effect.png" />
+            <Image Name="exit2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60" Margin="300,-380,0,0" Source="image/exit_effect.png" />
+            <Image Name="exit3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60" Margin="-300,380,0,0" Source="image/exit_effect_r.png" />
+            <Image Name="exit4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60" Margin="300,380,0,0" Source="image/exit_effect_r.png" />
+            
+            <Image Name="tile11" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,-300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile12" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,-300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile13" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,-300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,-300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile15" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,-300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile16" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,-300,0,0" Source="image/tile_stone_01.jpg" />
+
+            <Image Name="tile21" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,-180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile22" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,-180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile23" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,-180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile24" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,-180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile25" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,-180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile26" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,-180,0,0" Source="image/tile_stone_01.jpg" />
+
+            <Image Name="tile31" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,-60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile32" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,-60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile33" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,-60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile34" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,-60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile35" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,-60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile36" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,-60,0,0" Source="image/tile_stone_01.jpg" />
+
+            <Image Name="tile41" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile42" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile43" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile44" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile45" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,60,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile46" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,60,0,0" Source="image/tile_stone_01.jpg" />
+
+            <Image Name="tile51" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile52" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile53" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile54" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile55" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,180,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile56" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,180,0,0" Source="image/tile_stone_01.jpg" />
+
+            <Image Name="tile61" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-300,300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile62" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-180,300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile63" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="-60,300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile64" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="60,300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile65" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="180,300,0,0" Source="image/tile_stone_01.jpg" />
+            <Image Name="tile66" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Margin="300,300,0,0" Source="image/tile_stone_01.jpg" />         
+        </Grid>
+
+        <Grid Name="statuswindow" Height="400" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="420,0,0,0" Background="DarkGray">
+            <TextBlock Name="title" Text="Geister" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="30"/>
+            
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Width="140" Height="195" Margin="5,80,0,0" Background="Gray"/>
+            <TextBlock Name="statustext" Text="◆Removed Ghost◆" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,85,0,0" FontSize="15"/>
+
+            <Button Name="bt_test1" Content="test 1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,0,0,90" Click="bt_test1_Click"/>
+            <Button Name="bt_test2" Content="test 2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,0,0,50" Click="bt_test2_Click"/>
+            <Button Name="bt_test3" Content="reset" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,0,0,10" Click="bt_test3_Click"/>
+            
+            <TextBlock Name="count1" Text="Player 1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,110,0,0" FontSize="13"/>
+            <TextBlock Name="count2" Text="good" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,0,0" FontSize="10"/>
+            <TextBlock Name="count3" Text="evil" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,0,0" FontSize="10"/>
+            <TextBlock Name="count4" Text="Player 2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0" FontSize="13"/>
+            <TextBlock Name="count5" Text="good" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,220,0,0" FontSize="10"/>
+            <TextBlock Name="count6" Text="evil" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,250,0,0" FontSize="10"/>
+        </Grid>
+
+        <Grid Name="ghostlayer" Height="400" Width="560" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">
+
+            <Image Name="ghost11" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="75,180,0,0"/>
+            <Image Name="ghost12" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="135,180,0,0"/>
+            <Image Name="ghost13" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="195,180,0,0"/>
+            <Image Name="ghost14" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="255,180,0,0"/>
+            <Image Name="ghost15" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="75,300,0,0"/>
+            <Image Name="ghost16" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="135,300,0,0"/>
+            <Image Name="ghost17" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="195,300,0,0"/>
+            <Image Name="ghost18" Source="Image/ghost_1p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="255,300,0,0"/>
+
+            <Image Name="ghost21" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="75,-180,0,0"/>
+            <Image Name="ghost22" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="135,-180,0,0"/>
+            <Image Name="ghost23" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="195,-180,0,0"/>
+            <Image Name="ghost24" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="255,-180,0,0"/>
+            <Image Name="ghost25" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="75,-300,0,0"/>
+            <Image Name="ghost26" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="135,-300,0,0"/>
+            <Image Name="ghost27" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="195,-300,0,0"/>
+            <Image Name="ghost28" Source="Image/ghost_2p_def.png" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="255,-300,0,0"/>
+        </Grid>
+
+    </Grid>
+ 
+</Window>
