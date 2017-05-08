@@ -535,7 +535,7 @@ namespace Geister.GameSystem
             if (gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good).Equals(0))
             {
                 //Console.WriteLine("{0} {1}", gamestate.NotCurrentPlayer, gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.good));
-                Console.WriteLine("{0} Good Ghost Get Win!", gamestate.currentPlayer);
+                Console.WriteLine("{0} Win! (Capture AllGood Ghosts)", gamestate.currentPlayer);
                 gamestate.Winner = gamestate.currentPlayer;
                 return true;
             }
@@ -543,7 +543,7 @@ namespace Geister.GameSystem
             //Console.WriteLine("evil_{0} {1}", gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.evil), gamestate.NotCurrentPlayer);
             if (gamestate.GetGhostCount(gamestate.NotCurrentPlayer, GhostAttribute.evil).Equals(0))
             {
-                Console.WriteLine("{0} Evil Ghost dosnt exis Win!", gamestate.NotCurrentPlayer);
+                Console.WriteLine("{0} Win! (Evil Ghosts doesn't exist)", gamestate.NotCurrentPlayer);
                 gamestate.Winner = gamestate.NotCurrentPlayer;
                 return true;
             }
@@ -552,7 +552,7 @@ namespace Geister.GameSystem
 
             if (gamestate.IsGhostAtExit(gamestate.currentPlayer))
             {
-                Console.WriteLine("{0} Ghost Exits Win!", gamestate.currentPlayer);
+                Console.WriteLine("{0} Win! (Good Ghost Exits)", gamestate.currentPlayer);
                 gamestate.Winner = gamestate.currentPlayer;
                 return true;
             }
