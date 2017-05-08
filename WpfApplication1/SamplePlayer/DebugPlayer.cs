@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using Geister.GameSystem;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Geister.GameInformation
 {
@@ -30,7 +31,6 @@ namespace Geister.GameInformation
 
         public override Move GetMove()
         {
-
             boardState = GetBoardState();
 
             List<Ghost> glist = GetMyGhostList().OrderBy(j => Guid.NewGuid()).ToList();
@@ -39,6 +39,7 @@ namespace Geister.GameInformation
             gmlist.Add(GhostMove.Left);
             gmlist.Add(GhostMove.Right);
             gmlist.Add(GhostMove.Up);
+            gmlist.Add(GhostMove.Down);
             gmlist = gmlist.OrderBy(j => Guid.NewGuid()).ToList();
 
             Move m = null;
@@ -56,21 +57,6 @@ namespace Geister.GameInformation
                 }
 
             }
-
-            //Console.CursorLeft = 0;
-            //for (int i = 0; i < GetBoardState().GetLength(0);i++)
-            //{
-            //    for (int j = 0; j < GetBoardState().GetLength(1);j++)
-            //    {
-            //        Console.Write("{0,11}",GetBoardState()[i,j]);
-            //    }
-            //    Console.WriteLine();
-            //}
-            //foreach (Ghost g in GetCaputuredGhostList())
-            //{
-            //    Debug.WriteLine(">>>" + g.Gt);
-            //}
-
             return m;
         }
 

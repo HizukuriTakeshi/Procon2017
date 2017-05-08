@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Geister.GameInformation;
@@ -13,6 +13,8 @@ namespace Geister.GameSystem
     {
 
         private List<AbstractPlayer> playerList = new List<AbstractPlayer>();
+        private AbstractPlayer timeoutplayer1 = new DebugPlayer();
+        private AbstractPlayer timeoutplayer2 = new DebugPlayer();
 
         #region [フィールド]
         public GameState gamestate
@@ -254,7 +256,7 @@ namespace Geister.GameSystem
                 //DisplayVirtualBoard();
                 //DisplayBoard();
                 //Console.CursorLeft = 0;
-				//DisplayBoardState();
+                //DisplayBoardState();
 
 
 
@@ -270,14 +272,14 @@ namespace Geister.GameSystem
             {
                 P1.SetGameState(ConvertGameState(gamestate));
 
-                //P1.SetGameState(gamestate);
+                timeoutplayer1.SetGameState(ConvertGameState(gamestate));
             }
             else
              if (gamestate.currentPlayer.Equals(FieldObject.P2))
             {
                 //gamestateを反転して渡す
                 P2.SetGameState(ConvertGameState(gamestate));
-            //P2.SetGameState(gamestate);
+                timeoutplayer2.SetGameState(ConvertGameState(gamestate));
             }
 
             MovePlayer();
@@ -290,16 +292,16 @@ namespace Geister.GameSystem
             GameState tmp = gs.Clone();
             //変換するプロパティ
             //ghostlistの初期位置と現在位置 (8,6になっているので)
-            foreach(Ghost g in tmp.P1ghostList)
+            foreach (Ghost g in tmp.P1ghostList)
             {
-                g.P.X = g.P.X -1;
+                g.P.X = g.P.X - 1;
                 g.InitPos.X = g.InitPos.X - 1;
             }
-			foreach (Ghost g in tmp.P2ghostList)
-			{
-				g.P.X = g.P.X -1;
+            foreach (Ghost g in tmp.P2ghostList)
+            {
+                g.P.X = g.P.X - 1;
                 g.InitPos.X = g.InitPos.X - 1;
-			}
+            }
             foreach (Ghost g in tmp.P1GhostGetList)
             {
                 g.P.X = g.P.X - 1;
@@ -317,24 +319,24 @@ namespace Geister.GameSystem
             {
                 tmp.BoardState = RotateClockwise(RotateClockwise(tmp.BoardState));
 
-				//さらにghostlistの２つも反転
-				foreach (Ghost g in tmp.P1ghostList)
-				{
-					g.P.X = 5-g.P.X;
-					g.P.Y = 5-g.P.Y;
+                //さらにghostlistの２つも反転
+                foreach (Ghost g in tmp.P1ghostList)
+                {
+                    g.P.X = 5 - g.P.X;
+                    g.P.Y = 5 - g.P.Y;
                     g.InitPos.X = 5 - g.InitPos.X;
                     g.InitPos.X = 5 - g.InitPos.X;
-					//Console.WriteLine(g.P.X + " " + g.P.Y);
+                    //Console.WriteLine(g.P.X + " " + g.P.Y);
 
-				}
+                }
                 //Console.WriteLine();
-				foreach (Ghost g in tmp.P2ghostList)
-				{
-					g.P.X = 5-g.P.X;
-                    g.P.Y = 5-g.P.Y;
-					g.InitPos.X = 5 - g.InitPos.X;
-					g.InitPos.X = 5 - g.InitPos.X;
-				//Console.WriteLine(g.P.X + " " + g.P.Y);
+                foreach (Ghost g in tmp.P2ghostList)
+                {
+                    g.P.X = 5 - g.P.X;
+                    g.P.Y = 5 - g.P.Y;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    g.InitPos.X = 5 - g.InitPos.X;
+                    //Console.WriteLine(g.P.X + " " + g.P.Y);
                 }
                 foreach (Ghost g in tmp.P1GhostGetList)
                 {
@@ -354,7 +356,7 @@ namespace Geister.GameSystem
                 }
 
             }
-                return tmp;
+            return tmp;
         }
 
         FieldObject[,] RotateClockwise(FieldObject[,] g)
@@ -381,23 +383,23 @@ namespace Geister.GameSystem
         {
             try
             {
-				//
-				// もし、外部でキャンセルされていた場合
-				// このメソッドはOperationCanceledExceptionを発生させる。
-				//
-				cancelToken.ThrowIfCancellationRequested();
+                //
+                // もし、外部でキャンセルされていた場合
+                // このメソッドはOperationCanceledExceptionを発生させる。
+                //
+                cancelToken.ThrowIfCancellationRequested();
 
-				if (gamestate.currentPlayer.Equals(FieldObject.P1))
-                    {
-                        gamestate.CurrentPlayerMove = P1.GetMove();
+                if (gamestate.currentPlayer.Equals(FieldObject.P1))
+                {
+                    gamestate.CurrentPlayerMove = P1.GetMove();
 
-                    }
-                    else
+                }
+                else
                 if (gamestate.currentPlayer.Equals(FieldObject.P2))
-                    {
+                {
                     gamestate.CurrentPlayerMove = ConvertPosition(P2.GetMove());
-                    }
-				}
+                }
+            }
             catch (OperationCanceledException ex)
             {
                 //
@@ -417,27 +419,27 @@ namespace Geister.GameSystem
         private Move ConvertPosition(Move player2move)
         {
             GhostMove gm = GhostMove.Down;
-            if(player2move.GhostM == GhostMove.Down)
+            if (player2move.GhostM == GhostMove.Down)
             {
                 gm = GhostMove.Up;
             }
             else
-			if (player2move.GhostM == GhostMove.Left)
-			{
-				gm = GhostMove.Right;
-			}
-			else
-			if (player2move.GhostM == GhostMove.Right)
-			{
-				gm = GhostMove.Left;
-			}
-			else
-			if (player2move.GhostM == GhostMove.Up)
-			{
-				gm = GhostMove.Down;
-			}
+            if (player2move.GhostM == GhostMove.Left)
+            {
+                gm = GhostMove.Right;
+            }
+            else
+            if (player2move.GhostM == GhostMove.Right)
+            {
+                gm = GhostMove.Left;
+            }
+            else
+            if (player2move.GhostM == GhostMove.Up)
+            {
+                gm = GhostMove.Down;
+            }
 
-                Move m = new Move(new Position(5 - player2move.Pos.X, 5 - player2move.Pos.Y), gm);
+            Move m = new Move(new Position(5 - player2move.Pos.X, 5 - player2move.Pos.Y), gm);
             return m;
         }
 
@@ -467,14 +469,14 @@ namespace Geister.GameSystem
                 }
                 else
                 {
-                    
+
                     endTime = DateTime.Now;
                     timeSpan = endTime - startTime;
                     if (timeSpan.TotalMilliseconds > gamestate.ThinkTime)
                     {
                         //スレッドを強制終了させる
                         cts.Cancel();
-                        Debug.WriteLine("Task Cancel {0}",timeSpan.TotalMilliseconds);
+                        Debug.WriteLine("Task Cancel {0}", timeSpan.TotalMilliseconds);
 
                         isTaskTimeOut = true;
                         break;
@@ -482,14 +484,14 @@ namespace Geister.GameSystem
 
                     // スレッドが終了した時
                     //Debug.WriteLine(task.Status.ToString());
-					if (task.IsCanceled || task.IsCompleted)
-					{
-						Debug.WriteLine(">>> Task end");
-                        Debug.WriteLine(">>> {0}Turn {1}",gamestate.TurnNum,gamestate.currentPlayer);
-                        Debug.WriteLine(">>> {0} {1} {2}",gamestate.CurrentPlayerMove.Pos.X,gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.GhostM);
-						isTaskTimeOut = false;
-						break;
-					}
+                    if (task.IsCanceled || task.IsCompleted)
+                    {
+                        Debug.WriteLine(">>> Task end");
+                        Debug.WriteLine(">>> {0}Turn {1}", gamestate.TurnNum, gamestate.currentPlayer);
+                        Debug.WriteLine(">>> {0} {1} {2}", gamestate.CurrentPlayerMove.Pos.X, gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.GhostM);
+                        isTaskTimeOut = false;
+                        break;
+                    }
 
 
 
@@ -501,12 +503,26 @@ namespace Geister.GameSystem
                 JudgeMove(gamestate.currentPlayerMove);
                 if (timeSpan.TotalMilliseconds + processFPS < gamestate.ThinkTime)
                     //Debug.WriteLine("{0} < {1}", timeSpan.TotalMilliseconds + processFPS, gamestate.ThinkTime);
-                Thread.Sleep(processFPS);
+                    Thread.Sleep(processFPS);
             }
 
             else
             {
-                Debug.WriteLine("Time OVER");
+                ///タイムアウト用のプログラムを書く
+
+                if (gamestate.currentPlayer.Equals(FieldObject.P1))
+                {
+                    gamestate.CurrentPlayerMove = timeoutplayer1.GetMove();
+
+                }
+                else
+                if (gamestate.currentPlayer.Equals(FieldObject.P2))
+                {
+
+                    gamestate.CurrentPlayerMove = ConvertPosition(timeoutplayer2.GetMove());
+                }
+                JudgeMove(gamestate.currentPlayerMove);
+                Debug.WriteLine(">>>Time OVER");
             }
         }
 
@@ -542,7 +558,7 @@ namespace Geister.GameSystem
             }
             return false;
         }
-        
+
         public void NextTurn()
         {
             gamestate.TurnNum++;
@@ -711,7 +727,7 @@ namespace Geister.GameSystem
             gamestate.SetBoardState();
 
         }
-        
+
 
         public int GetSamePosGhostIndex(List<Ghost> glist, Position p)
         {
@@ -995,23 +1011,23 @@ namespace Geister.GameSystem
             }
         }
 
-		public void DisplayBoardState()
-		{
-			for (int i = 0; i < gamestate.BoardState.GetLength(1); i++)
-			{
-				Console.Write("{0,11} ", i);
-			}
-			Console.WriteLine();
-			for (int i = 0; i < gamestate.BoardState.GetLength(0); i++)
-			{
-				Console.Write("{0} ", i);
-				for (int j = 0; j < gamestate.BoardState.GetLength(1); j++)
-				{
-					Console.Write("{0,11} ", gamestate.BoardState[i, j]);
-				}
-				Console.WriteLine();
-			}
-		}
+        public void DisplayBoardState()
+        {
+            for (int i = 0; i < gamestate.BoardState.GetLength(1); i++)
+            {
+                Console.Write("{0,11} ", i);
+            }
+            Console.WriteLine();
+            for (int i = 0; i < gamestate.BoardState.GetLength(0); i++)
+            {
+                Console.Write("{0} ", i);
+                for (int j = 0; j < gamestate.BoardState.GetLength(1); j++)
+                {
+                    Console.Write("{0,11} ", gamestate.BoardState[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
 
         /// <summary>
         /// テスト用Move入力関数(コンソールから)

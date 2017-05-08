@@ -72,7 +72,7 @@
     <Compile Include="GameInformaiton\Move.cs" />
     <Compile Include="GameInformaiton\Position.cs" />
     <Compile Include="Gamesystem\Square.cs" />
-    <Compile Include="SamplePlayer\TestPlayer.cs" />
+    <Compile Include="SamplePlayer\DebugPlayer.cs" />
     <Compile Include="GameInformaiton\FieldObject.cs" />
     <Compile Include="Gamesystem\GameManager.cs" />
     <Compile Include="Gamesystem\GameState.cs" />
