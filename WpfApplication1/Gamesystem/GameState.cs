@@ -37,7 +37,7 @@ namespace Geister.GameSystem
         public FieldObject currentPlayer = FieldObject.P1;
         public FieldObject notcurrentPlayer = FieldObject.P2;
 
-        private const int THINKTIME = 500;
+        private const int THINKTIME = 1000;
         private int turnNum = 1;
         private FieldObject winner = FieldObject.blank;
 

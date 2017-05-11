@@ -43,7 +43,7 @@ namespace Geister
             */
 
 
-            GameManager gameManager = new GameManager(new DebugPlayer("a"), new DebugPlayer("b"), 200, 20);
+            GameManager gameManager = new GameManager(new DebugPlayer("a"), new TestPlayer("b"), 100, 100);
 
             app.InitializeComponent();
             app.Run(new GeisterUI(gameManager));

@@ -227,6 +227,7 @@ namespace Geister.GameSystem
             System.Threading.Thread.Sleep(3000);
 
 
+            int count = 0;
             for (int i = 0; i < FinalTurn; i++)
             {
 
@@ -264,11 +265,13 @@ namespace Geister.GameSystem
                 //Console.CursorLeft = 0;
                 //DisplayBoardState();
 
-
+                count++;
 
             }
 
-            if (!VorDCheck())
+            //forループ後も行われる．
+            //出口での勝利はremoveされるため
+            if (count == FinalTurn)
             {
                 gamestate.Flag = true;
                 OverTurn();
@@ -327,7 +330,6 @@ namespace Geister.GameSystem
             {
                 gamestate.Winner = FieldObject.blank;
             }
-
         }
 
         private void ProcessTurn()
@@ -958,14 +960,27 @@ namespace Geister.GameSystem
                     //移動先が盤面内か
                     if (GhostIsInBoard(new Position(m.Pos.X - 1, m.Pos.Y)) || IsExit(m.Pos))
                     {
+                        //行き先が出口の時
+                        if (IsExit(new Position(m.Pos.X - 1, m.Pos.Y)))
+                        {
+                            //さらに自分のゴーストが良いやつであるか
+                            if (CheckGhostAttribute(m.Pos))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+
+                        }
+
                         //移動先に自分のゴーストがいないか
                         if (!GhostExists(new Position(m.Pos.X - 1, m.Pos.Y)))
                         {
-                            //Debug.WriteLine("Can move");
                             return true;
                         }
                     }
-
                 }
 
             }
@@ -994,6 +1009,46 @@ namespace Geister.GameSystem
             return false;
         }
 
+        public Boolean CheckGhostAttribute(Position p)
+        {
+            Boolean result = false;
+            //pが不正な値でないか判定
+            if (GhostIsInBoard(p))
+            {
+                //位置pにゴーストが存在するか判定
+                if (gamestate.M_Board[p.X, p.Y].Equals(gamestate.currentPlayer))
+                {
+                    //カレントプレイヤーのゴーストリスト取得
+                    List<Ghost> tmp = null;
+                    if (gamestate.currentPlayer == FieldObject.P1)
+                    {
+                        tmp = gamestate.P1ghostList;
+                    }
+                    else if (gamestate.currentPlayer == FieldObject.P2)
+                    {
+                        tmp = gamestate.P2ghostList;
+                    }
+
+                    //一致するゴーストを見つける
+                    foreach (Ghost g in tmp)
+                    {
+                        if (g.P.X == p.X && g.P.Y == p.Y)
+                        {
+                            //属性が正しいかチェック
+                            if (g.Gt == GhostAttribute.good)
+                            {
+                                result = true;
+                                break;
+                            }
+                            else
+                            {
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
         /// <summary>
         /// pが不正な値でないか判定
         /// </summary>
