@@ -269,13 +269,13 @@ namespace Geister.GameInformation
 
         /// <summary>
         /// ゴーストの初期配置を設定するメソッド
-        /// <remaks>
+        /// </summary>
+        /// /// <remaks>
         /// ゴーストの各属性が4つずつ設定されなかった場合は
         /// new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
         ///                            { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good}}
         /// が初期配置になります．
         /// </remaks>
-        /// </summary>
         /// <param name="init">
         /// ゴーストの2次元配列
         /// </param>
