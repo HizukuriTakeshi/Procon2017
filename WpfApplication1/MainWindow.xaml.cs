@@ -109,6 +109,10 @@ namespace Geister
                 Result.Text = gameManager.gamestate.Winner.ToString() + " Win!";
 
             }
+            else if (gameManager.gamestate.Flag)
+            {
+                Result.Text =  " Draw...";
+            }
         }
 
         // テスト用ボタン1(モード切替)のクリック時処理の記述

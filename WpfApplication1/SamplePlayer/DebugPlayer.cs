@@ -35,11 +35,11 @@ namespace Geister.GameInformation
 
             List<Ghost> glist = GetMyGhostList().OrderBy(j => Guid.NewGuid()).ToList();
             List<GhostMove> gmlist = new List<GhostMove>();
-            //gmlist.Add(GhostMove.Down);
-            gmlist.Add(GhostMove.Left);
-            gmlist.Add(GhostMove.Right);
-            gmlist.Add(GhostMove.Up);
             gmlist.Add(GhostMove.Down);
+            //gmlist.Add(GhostMove.Left);
+            //gmlist.Add(GhostMove.Right);
+            //gmlist.Add(GhostMove.Up);
+            //gmlist.Add(GhostMove.Down);
             gmlist = gmlist.OrderBy(j => Guid.NewGuid()).ToList();
 
             Move m = null;

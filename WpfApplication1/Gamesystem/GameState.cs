@@ -24,6 +24,7 @@ namespace Geister.GameSystem
         private GhostType[,] board = new GhostType[6, 6];
         private FieldObject[,] boardState = new FieldObject[6, 6];
 
+    
 
         private List<Ghost> p1GhostList = new List<Ghost>();
         private List<Ghost> p2GhostList = new List<Ghost>();
@@ -37,7 +38,7 @@ namespace Geister.GameSystem
         public FieldObject notcurrentPlayer = FieldObject.P2;
 
         private const int THINKTIME = 500;
-        private int turnNum = 0;
+        private int turnNum = 1;
         private FieldObject winner = FieldObject.blank;
 
         #endregion
@@ -158,6 +159,10 @@ namespace Geister.GameSystem
             set { this.winner = value; }
         }
 
+        public Boolean Flag
+        {
+            get; set;
+        } = false;
 
 
         #endregion

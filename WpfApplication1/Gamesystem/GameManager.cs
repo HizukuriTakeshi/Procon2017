@@ -226,12 +226,15 @@ namespace Geister.GameSystem
 
             System.Threading.Thread.Sleep(3000);
 
+
             for (int i = 0; i < FinalTurn; i++)
             {
 
                 gamestate.CurrentPlayer = FieldObject.P1;
                 gamestate.NotCurrentPlayer = FieldObject.P2;
-                NextTurn();
+                //NextTurn();
+                Evil = Square.P1Evil;
+                Good = Square.P1Good;
                 ProcessTurn();
                 if (VorDCheck())
                 {
@@ -247,12 +250,15 @@ namespace Geister.GameSystem
 
                 gamestate.CurrentPlayer = FieldObject.P2;
                 gamestate.NotCurrentPlayer = FieldObject.P1;
-                NextTurn();
+                //NextTurn();
+                Evil = Square.P2Evil;
+                Good = Square.P2Good;
                 ProcessTurn();
                 if (VorDCheck())
                 {
                     break;
                 }
+                gamestate.TurnNum++;
                 //DisplayVirtualBoard();
                 //DisplayBoard();
                 //Console.CursorLeft = 0;
@@ -260,6 +266,66 @@ namespace Geister.GameSystem
 
 
 
+            }
+
+            if (!VorDCheck())
+            {
+                gamestate.Flag = true;
+                OverTurn();
+            }
+            //勝敗を決める
+
+
+        }
+
+        private void OverTurn()
+        {
+            int p1score = 0;
+            int p2score = 0;
+            int p1gnum = 0;
+            int p1enum = 0;
+            int p2gnum = 0;
+            int p2enum = 0;
+
+            foreach (Ghost g in gamestate.P1ghostList)
+            {
+                if (g.Gt == GhostAttribute.good)
+                {
+                    p1gnum++;
+                }
+                else if (g.Gt == GhostAttribute.evil)
+                {
+                    p1enum++;
+                }
+            }
+
+            foreach (Ghost g in gamestate.P2ghostList)
+            {
+                if (g.Gt == GhostAttribute.good)
+                {
+                    p2gnum++;
+                }
+                else if (g.Gt == GhostAttribute.evil)
+                {
+                    p2enum++;
+                }
+            }
+
+            p1score = 2 * (p1gnum - p2gnum) - (p1enum - p2enum);
+            p2score = 2 * (p2gnum - p1gnum) - (p2enum - p1enum);
+
+            if (p1score > p2score)
+            {
+                gamestate.Winner = FieldObject.P1;
+            }
+            else
+                if (p1score < p2score)
+            {
+                gamestate.Winner = FieldObject.P2;
+            }
+            else
+            {
+                gamestate.Winner = FieldObject.blank;
             }
 
         }
@@ -418,29 +484,33 @@ namespace Geister.GameSystem
         /// <param name="player2move">Player2move.</param>
         private Move ConvertPosition(Move player2move)
         {
-            GhostMove gm = GhostMove.Down;
-            if (player2move.GhostM == GhostMove.Down)
+            if (player2move != null)
             {
-                gm = GhostMove.Up;
-            }
-            else
-            if (player2move.GhostM == GhostMove.Left)
-            {
-                gm = GhostMove.Right;
-            }
-            else
-            if (player2move.GhostM == GhostMove.Right)
-            {
-                gm = GhostMove.Left;
-            }
-            else
-            if (player2move.GhostM == GhostMove.Up)
-            {
-                gm = GhostMove.Down;
-            }
+                GhostMove gm = GhostMove.Down;
+                if (player2move.GhostM == GhostMove.Down)
+                {
+                    gm = GhostMove.Up;
+                }
+                else
+                if (player2move.GhostM == GhostMove.Left)
+                {
+                    gm = GhostMove.Right;
+                }
+                else
+                if (player2move.GhostM == GhostMove.Right)
+                {
+                    gm = GhostMove.Left;
+                }
+                else
+                if (player2move.GhostM == GhostMove.Up)
+                {
+                    gm = GhostMove.Down;
+                }
 
-            Move m = new Move(new Position(5 - player2move.Pos.X, 5 - player2move.Pos.Y), gm);
-            return m;
+                Move m = new Move(new Position(5 - player2move.Pos.X, 5 - player2move.Pos.Y), gm);
+                return m;
+            }
+            return null;
         }
 
 
@@ -488,7 +558,10 @@ namespace Geister.GameSystem
                     {
                         Debug.WriteLine(">>> Task end");
                         Debug.WriteLine(">>> {0}Turn {1}", gamestate.TurnNum, gamestate.currentPlayer);
-                        Debug.WriteLine(">>> {0} {1} {2}", gamestate.CurrentPlayerMove.Pos.X, gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.GhostM);
+                        if (gamestate.CurrentPlayerMove != null)
+                        {
+                            Debug.WriteLine(">>> {0} {1} {2}", gamestate.CurrentPlayerMove.Pos.X, gamestate.CurrentPlayerMove.Pos.Y, gamestate.CurrentPlayerMove.GhostM);
+                        }
                         isTaskTimeOut = false;
                         break;
                     }
@@ -510,18 +583,18 @@ namespace Geister.GameSystem
             {
                 ///タイムアウト用のプログラムを書く
 
-                if (gamestate.currentPlayer.Equals(FieldObject.P1))
-                {
-                    gamestate.CurrentPlayerMove = timeoutplayer1.GetMove();
+                //if (gamestate.currentPlayer.Equals(FieldObject.P1))
+                //{
+                //    gamestate.CurrentPlayerMove = timeoutplayer1.GetMove();
 
-                }
-                else
-                if (gamestate.currentPlayer.Equals(FieldObject.P2))
-                {
+                //}
+                //else
+                //if (gamestate.currentPlayer.Equals(FieldObject.P2))
+                //{
 
-                    gamestate.CurrentPlayerMove = ConvertPosition(timeoutplayer2.GetMove());
-                }
-                JudgeMove(gamestate.currentPlayerMove);
+                //    gamestate.CurrentPlayerMove = ConvertPosition(timeoutplayer2.GetMove());
+                //}
+                //JudgeMove(gamestate.currentPlayerMove);
                 Debug.WriteLine(">>>Time OVER");
             }
         }
@@ -566,16 +639,13 @@ namespace Geister.GameSystem
             {
                 Evil = Square.P1Evil;
                 Good = Square.P1Good;
-                //TurnPlayer = FieldObject.P1;
-                //gamestate.NotCurrentPlayer = FieldObject.P2;
             }
             else
             {
                 Evil = Square.P2Evil;
                 Good = Square.P2Good;
-                //TurnPlayer = FieldObject.P2;
-                //gamestate.NotCurrentPlayer = FieldObject.P1;
             }
+
             //Console.WriteLine("Turn{0} {1}", gamestate.TurnNum, gamestate.currentPlayer);
 
         }
@@ -584,148 +654,150 @@ namespace Geister.GameSystem
         public void JudgeMove(Move m)
         {
             //書き換え用変数
-            Move _m = new Move(new Position(m.Pos.X, m.Pos.Y), m.GhostM);
-
-            if (gamestate.currentPlayer.Equals(FieldObject.P1))
+            if (m != null)
             {
-                //board変換
-                _m.Pos.X = m.Pos.X + 1;
-                _m.Pos.Y = m.Pos.Y;
+                Move _m = new Move(new Position(m.Pos.X, m.Pos.Y), m.GhostM);
 
-
-                //移動可能性
-                if (IsGhostMovable(_m))
+                if (gamestate.currentPlayer.Equals(FieldObject.P1))
                 {
+                    //board変換
+                    _m.Pos.X = m.Pos.X + 1;
+                    _m.Pos.Y = m.Pos.Y;
 
-                    //移動(ゴーストリストのpositionを書き換える)
-                    //移動先に相手のゴーストがいるときはそのゴーストをリストから消す
-                    int _tmp;
-                    switch (_m.GhostM)
+
+                    //移動可能性
+                    if (IsGhostMovable(_m))
                     {
 
-                        case GhostMove.Down:
-                            //xとｙがm.posと同じリストの中の要素のインデックスを一つ取得する
-                            gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X + 1, _m.Pos.Y);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
-                                gamestate.P2ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X + 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
+                        //移動(ゴーストリストのpositionを書き換える)
+                        //移動先に相手のゴーストがいるときはそのゴーストをリストから消す
+                        int _tmp;
+                        switch (_m.GhostM)
+                        {
 
-                        case GhostMove.Left:
-                            gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y - 1);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
-                                gamestate.P2ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
+                            case GhostMove.Down:
+                                //xとｙがm.posと同じリストの中の要素のインデックスを一つ取得する
+                                gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X + 1, _m.Pos.Y);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
+                                    gamestate.P2ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X + 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
 
-                        case GhostMove.Right:
-                            gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y + 1);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
-                                gamestate.P2ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-                        case GhostMove.Up:
-                            gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X - 1, _m.Pos.Y);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
-                                gamestate.P2ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-                        default:
-                            break;
+                            case GhostMove.Left:
+                                gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y - 1);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
+                                    gamestate.P2ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+
+                            case GhostMove.Right:
+                                gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y + 1);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
+                                    gamestate.P2ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+                            case GhostMove.Up:
+                                gamestate.P1ghostList[gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, _m.Pos)].P = new Position(_m.Pos.X - 1, _m.Pos.Y);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P1GhostGetList.Add(gamestate.P2ghostList[_tmp]);
+                                    gamestate.P2ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    //Borad変換
+                    _m.Pos.X = m.Pos.X + 1;
+                    _m.Pos.Y = m.Pos.Y;
+
+                    //移動可能性
+                    if (IsGhostMovable(_m))
+                    {
+
+                        //移動(ゴーストリストのpositionを書き換える)
+                        //移動先に相手のゴーストがいるときはそのゴーストをリストから消す
+                        int _tmp;
+                        switch (_m.GhostM)
+                        {
+
+                            case GhostMove.Down:
+                                //xとｙがm.posと同じリストの中の要素のインデックスを一つ取得する
+                                gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X + 1, _m.Pos.Y);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
+                                    gamestate.P1ghostList.RemoveAt(_tmp);
+
+                                }
+                                //Vb.M_Board[m.Pos.X + 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+
+                            case GhostMove.Left:
+                                gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y - 1);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
+                                    gamestate.P1ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+
+                            case GhostMove.Right:
+                                gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y + 1);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
+                                    gamestate.P1ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+                            case GhostMove.Up:
+                                gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X - 1, _m.Pos.Y);
+                                _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
+                                if (_tmp >= 0)
+                                {
+                                    gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
+                                    gamestate.P1ghostList.RemoveAt(_tmp);
+                                }
+                                //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
                 }
 
+                gamestate.ResetGhostPostion();
+                gamestate.ResetGhostPositionInBoard();
+                gamestate.SetGhostPostionInVirtual();
+                gamestate.SetGhostPositionInBoard();
+                gamestate.SetBoardState();
             }
-            else
-            {
-                //Borad変換
-                _m.Pos.X = m.Pos.X + 1;
-                _m.Pos.Y = m.Pos.Y;
-
-                //移動可能性
-                if (IsGhostMovable(_m))
-                {
-
-                    //移動(ゴーストリストのpositionを書き換える)
-                    //移動先に相手のゴーストがいるときはそのゴーストをリストから消す
-                    int _tmp;
-                    switch (_m.GhostM)
-                    {
-
-                        case GhostMove.Down:
-                            //xとｙがm.posと同じリストの中の要素のインデックスを一つ取得する
-                            gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X + 1, _m.Pos.Y);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X + 1, _m.Pos.Y));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
-                                gamestate.P1ghostList.RemoveAt(_tmp);
-
-                            }
-                            //Vb.M_Board[m.Pos.X + 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-
-                        case GhostMove.Left:
-                            gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y - 1);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y - 1));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
-                                gamestate.P1ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X, m.Pos.Y - 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-
-                        case GhostMove.Right:
-                            gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X, _m.Pos.Y + 1);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X, _m.Pos.Y + 1));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
-                                gamestate.P1ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X, m.Pos.Y + 1] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-                        case GhostMove.Up:
-                            gamestate.P2ghostList[gamestate.GetSamePosGhostIndex(gamestate.P2ghostList, _m.Pos)].P = new Position(_m.Pos.X - 1, _m.Pos.Y);
-                            _tmp = gamestate.GetSamePosGhostIndex(gamestate.P1ghostList, new Position(_m.Pos.X - 1, _m.Pos.Y));
-                            if (_tmp >= 0)
-                            {
-                                gamestate.P2GhostGetList.Add(gamestate.P1ghostList[_tmp]);
-                                gamestate.P1ghostList.RemoveAt(_tmp);
-                            }
-                            //Vb.M_Board[m.Pos.X - 1, m.Pos.Y] = Vb.M_Board[m.Pos.X, m.Pos.Y];
-                            break;
-                        default:
-                            break;
-                    }
-
-                }
-            }
-
-            gamestate.ResetGhostPostion();
-            gamestate.ResetGhostPositionInBoard();
-            gamestate.SetGhostPostionInVirtual();
-            gamestate.SetGhostPositionInBoard();
-            gamestate.SetBoardState();
-
         }
 
 
@@ -777,14 +849,13 @@ namespace Geister.GameSystem
             //Ghostlistを検索し出口にいないかチェック
             if (o.Equals(FieldObject.P1))
             {
-                Debug.WriteLine("P1");
                 foreach (Ghost g in gamestate.P1ghostList)
                 {
-                    Debug.WriteLine("roop");
                     if (g.P.X == 0 && g.P.Y == 0 || g.P.X == 0 && g.P.Y == 5)
                     {
-                        Debug.WriteLine("0005");
+                        gamestate.P2GhostGetList.Add(g);
                         gamestate.P1ghostList.Remove(g);
+
                         if (g.Gt.Equals((GhostAttribute.good)))
                         {
                             return true;
@@ -803,6 +874,7 @@ namespace Geister.GameSystem
                 {
                     if (g.P.X == 7 && g.P.Y == 0 || g.P.X == 7 && g.P.Y == 5)
                     {
+                        gamestate.P1GhostGetList.Add(g);
                         gamestate.P2ghostList.Remove(g);
 
                         if (g.Gt.Equals((GhostAttribute.good)))
