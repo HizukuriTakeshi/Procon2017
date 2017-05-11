@@ -201,6 +201,37 @@ namespace Geister.GameInformation
         }
 
         /// <summary>
+        /// 指定した位置の自身のゴーストの属性を取得する
+        /// </summary>
+        /// <param name="p">
+        /// 指定する位置
+        /// </param>
+        /// <returns>
+        /// Type:GhostAttribute good or evil or NULL
+        /// </returns>
+        public GhostAttribute GetMyGhostAttribute(Position p)
+        {
+            List<Ghost> glist = null;
+            if (gameState.currentPlayer.Equals(FieldObject.P1))
+            {
+                glist = gameState.P1ghostList;
+            }
+            else if (gameState.currentPlayer.Equals(FieldObject.P2))
+            {
+                glist = gameState.P2ghostList;
+            }
+
+            foreach (Ghost g in glist)
+            {
+                if (p.X == g.P.X && p.Y == g.P.Y)
+                {
+                    return g.Gt;
+                }
+            }
+            return GhostAttribute.NULL;
+        }
+
+        /// <summary>
         /// 指定したプレイヤーのゴーストのポジションのリストを取得する
         /// </summary>
         /// <param name="player">
@@ -270,12 +301,12 @@ namespace Geister.GameInformation
         /// <summary>
         /// ゴーストの初期配置を設定するメソッド
         /// </summary>
-        /// /// <remaks>
+        /// <remarks>
         /// ゴーストの各属性が4つずつ設定されなかった場合は
         /// new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
         ///                            { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good}}
         /// が初期配置になります．
-        /// </remaks>
+        /// </remarks>
         /// <param name="init">
         /// ゴーストの2次元配列
         /// </param>

@@ -15,6 +15,10 @@ namespace Geister.GameInformation
         /// <summary>
         /// 悪
         /// </summary>
-        evil
+        evil,
+        /// <summary>
+        /// 値なし
+        /// </summary>
+        NULL
     }
 }
