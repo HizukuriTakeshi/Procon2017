@@ -257,6 +257,15 @@ namespace Geister.GameInformation
         }
 
         /// <summary>
+        /// 現在のターンを取得する
+        /// </summary>
+        /// <returns></returns>
+        public int GetTurn()
+        {
+            return gameState.TurnNum;
+        }
+
+        /// <summary>
         /// ゴーストの初期配置を設定するメソッド
         /// </summary>
         /// <param name="init">
