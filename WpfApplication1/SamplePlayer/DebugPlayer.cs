@@ -25,11 +25,8 @@ namespace Geister.GameInformation
         {
             this.name = name;
             SetInitialPlacement(new GhostAttribute[2, 4] {
-                 { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
-                 { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good }
-               
-                                                     }
-                                                              );
+                 { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good },
+                 { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil }});
         }
 
         public override Move GetMove()
@@ -40,7 +37,7 @@ namespace Geister.GameInformation
             gmlist.Add(GhostMove.Down);
             gmlist.Add(GhostMove.Left);
             gmlist.Add(GhostMove.Right);
-           gmlist.Add(GhostMove.Up);
+            gmlist.Add(GhostMove.Up);
             gmlist = gmlist.OrderBy(j => Guid.NewGuid()).ToList();
 
             Move m = null;

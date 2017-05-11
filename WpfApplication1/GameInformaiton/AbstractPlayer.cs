@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Geister.GameSystem;
@@ -181,11 +181,11 @@ namespace Geister.GameInformation
             List<Ghost> glist = null;
 
             //
-            if(player.Equals(FieldObject.P1))
+            if (player.Equals(FieldObject.P1))
             {
                 glist = gameState.P1ghostList;
             }
-            else if(player.Equals(FieldObject.P2))
+            else if (player.Equals(FieldObject.P2))
             {
                 glist = gameState.P2ghostList;
             }
@@ -213,21 +213,21 @@ namespace Geister.GameInformation
         {
             List<Position> plist = new List<Position>();
             List<Ghost> glist = new List<Ghost>();
-            if(player.Equals(FieldObject.P1))
+            if (player.Equals(FieldObject.P1))
             {
                 glist = gameState.P1ghostList;
             }
-            else if(player.Equals(FieldObject.P2))
+            else if (player.Equals(FieldObject.P2))
             {
                 glist = gameState.P2ghostList;
             }
 
 
 
-                foreach (Ghost g in glist)
-                {
-                    plist.Add(g.P.Clone());
-                }
+            foreach (Ghost g in glist)
+            {
+                plist.Add(g.P.Clone());
+            }
             return plist;
 
         }
@@ -259,7 +259,9 @@ namespace Geister.GameInformation
         /// <summary>
         /// 現在のターンを取得する
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 現在のターン数
+        /// </returns>
         public int GetTurn()
         {
             return gameState.TurnNum;
@@ -267,16 +269,50 @@ namespace Geister.GameInformation
 
         /// <summary>
         /// ゴーストの初期配置を設定するメソッド
+        /// <remaks>
+        /// ゴーストの各属性が4つずつ設定されなかった場合は
+        /// new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
+        ///                            { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good}}
+        /// が初期配置になります．
+        /// </remaks>
         /// </summary>
         /// <param name="init">
         /// ゴーストの2次元配列
         /// </param>
         public void SetInitialPlacement(GhostAttribute[,] init)
         {
-            this.initialPlacement = init;
+            int countG = 0;
+            int countE = 0;
+            for (int i = 0; i < init.GetLength(0); i++)
+            {
+                for (int j = 0; j < init.GetLength(1); j++)
+                {
+                    if (init[i, j] == GhostAttribute.good)
+                    {
+                        countG++;
+                    }
+                    else if (init[i, j] == GhostAttribute.evil)
+                    {
+                        countE++;
+                    }
+                }
+            }
+
+            if (countE == 4 && countG == 4)
+            {
+                this.initialPlacement = init;
+            }
+            else
+            {
+                this.initialPlacement = new GhostAttribute[2, 4] { { GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil, GhostAttribute.evil },
+                                                      { GhostAttribute.good, GhostAttribute.good, GhostAttribute.good, GhostAttribute.good }};
+                Debug.WriteLine(">>>invalid ghostattribute");
+
+
+            }
         }
 
-       
+
 
         #endregion
     }
