@@ -11,11 +11,11 @@ namespace Geister.GameInformation
     {
         #region [フィールド]
         /// <summary>
-        /// 行
+        /// 行番号
         /// </summary>
         public int Row;
         /// <summary>
-        /// 列
+        /// 列番号
         /// </summary>
         public int Col;
         #endregion
@@ -25,10 +25,10 @@ namespace Geister.GameInformation
         /// コンストラクタ
         /// </summary>
         /// <param name="row">
-        /// 盤面上の行
+        /// 盤面上の行番号
         /// </param>
         /// <param name="col">
-        /// 盤面上の列
+        /// 盤面上の列番号
         /// </param>
         public Position(int row, int col)
         {
@@ -39,13 +39,13 @@ namespace Geister.GameInformation
 
         #region [パブリックメソッド]
         /// <summary>
-        /// 行,列を設定する
+        /// 行,列番号を設定する
         /// </summary>
         /// <param name="row">
-        /// 盤面上の行
+        /// 盤面上の行番号
         /// </param>
         /// <param name="col">
-        /// 盤面上の列
+        /// 盤面上の列番号
         /// </param>
         public void SetPosition(int row, int col)
         {

@@ -56,10 +56,10 @@ namespace Geister.GameInformation
         /// ゴーストの位置と移動方向を設定する
         /// </remarks>
         /// <param name="row">
-        /// 行
+        /// 行番号
         /// </param>
         /// <param name="col">
-        /// 列
+        /// 列番号
         /// </param>
         /// <param name="gm">
         /// ゴーストの移動方向
