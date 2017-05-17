@@ -238,12 +238,12 @@ namespace Geister.GameSystem
         {
             foreach (Ghost g in P1ghostList)
             {
-                M_Board[g.P.X, g.P.Y] = FieldObject.P1;
+                M_Board[g.P.Row, g.P.Col] = FieldObject.P1;
             }
 
             foreach (Ghost g in P2ghostList)
             {
-                M_Board[g.P.X, g.P.Y] = FieldObject.P2;
+                M_Board[g.P.Row, g.P.Col] = FieldObject.P2;
             }
         }
         /// <summary>
@@ -268,8 +268,8 @@ namespace Geister.GameSystem
             foreach (Ghost g in P1ghostList)
             {
                 //vb->b変換
-                int x = g.P.X - 1;
-                int y = g.P.Y;
+                int x = g.P.Row - 1;
+                int y = g.P.Col;
 
                 //例外処理
                 if (x < 0 || y < 0 || x > 5 || y > 5)
@@ -297,8 +297,8 @@ namespace Geister.GameSystem
             foreach (Ghost g in P2ghostList)
             {
                 //vb->b変換
-                int x = g.P.X - 1;
-                int y = g.P.Y;
+                int x = g.P.Row - 1;
+                int y = g.P.Col;
 
                 //例外処理
                 if (x < 0 || y < 0 || x > 5 || y > 5)
@@ -358,7 +358,7 @@ namespace Geister.GameSystem
             int index = -1;
             foreach (Ghost g in glist)
             {
-                if (g.P.X == p.X && g.P.Y == p.Y)
+                if (g.P.Row == p.Row && g.P.Col == p.Col)
                 {
                     index = glist.IndexOf(g);
                     break;
@@ -405,7 +405,7 @@ namespace Geister.GameSystem
 
                 foreach (Ghost g in P1ghostList)
                 {
-                    if (g.P.X == 0 && g.P.Y == 0 || g.P.X == 0 && g.P.Y == 5)
+                    if (g.P.Row == 0 && g.P.Col == 0 || g.P.Row == 0 && g.P.Col == 5)
                     {
                         P1ghostList.Remove(g);
                         if (g.Gt.Equals((GhostAttribute.good)))
@@ -424,7 +424,7 @@ namespace Geister.GameSystem
             {
                 foreach (Ghost g in P2ghostList)
                 {
-                    if (g.P.X == 7 && g.P.Y == 0 || g.P.X == 7 && g.P.Y == 5)
+                    if (g.P.Row == 7 && g.P.Col == 0 || g.P.Row == 7 && g.P.Col == 5)
                     {
                         P2ghostList.Remove(g);
 

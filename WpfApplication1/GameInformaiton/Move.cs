@@ -55,18 +55,18 @@ namespace Geister.GameInformation
         /// <remarks>
         /// ゴーストの位置と移動方向を設定する
         /// </remarks>
-        /// <param name="x">
-        /// X座標
+        /// <param name="row">
+        /// 行
         /// </param>
-        /// <param name="y">
-        /// Y座標
+        /// <param name="col">
+        /// 列
         /// </param>
         /// <param name="gm">
         /// ゴーストの移動方向
         /// </param>
-        public Move(int x, int y, GhostMove gm)
+        public Move(int row, int col, GhostMove gm)
         {
-            Pos = new Position(x, y);
+            Pos = new Position(row, col);
             GhostM = gm;
         }
         #endregion

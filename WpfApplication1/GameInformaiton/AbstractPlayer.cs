@@ -223,7 +223,7 @@ namespace Geister.GameInformation
 
             foreach (Ghost g in glist)
             {
-                if (p.X == g.P.X && p.Y == g.P.Y)
+                if (p.Row == g.P.Row && p.Col == g.P.Col)
                 {
                     return g.Gt;
                 }

@@ -11,46 +11,46 @@ namespace Geister.GameInformation
     {
         #region [フィールド]
         /// <summary>
-        /// X座標
+        /// 行
         /// </summary>
-        public int X;
+        public int Row;
         /// <summary>
-        /// Y座標
+        /// 列
         /// </summary>
-        public int Y;
+        public int Col;
         #endregion
 
         #region　[コンストラクタ]
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="x">
-        /// 盤面のx座標
+        /// <param name="row">
+        /// 盤面上の行
         /// </param>
-        /// <param name="y">
-        /// 盤面のy座標
+        /// <param name="col">
+        /// 盤面上の列
         /// </param>
-        public Position(int x, int y)
+        public Position(int row, int col)
         {
-            this.X = x;
-            this.Y = y;
+            this.Row = row;
+            this.Col = col;
         }
         #endregion
 
         #region [パブリックメソッド]
         /// <summary>
-        /// x,y座標を設定する
+        /// 行,列を設定する
         /// </summary>
-        /// <param name="x">
-        /// 盤面のx座標
+        /// <param name="row">
+        /// 盤面上の行
         /// </param>
-        /// <param name="y">
-        /// 盤面のy座標
+        /// <param name="col">
+        /// 盤面上の列
         /// </param>
-        public void SetPosition(int x, int y)
+        public void SetPosition(int row, int col)
         {
-            this.X = x;
-            this.Y = y;
+            this.Row = row;
+            this.Col = col;
         }
         #endregion
 
