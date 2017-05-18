@@ -119,6 +119,23 @@ namespace Geister.GameInformation
         }
 
         /// <summary>
+        /// 対戦相手のFieldObjectにおける値を取得する
+        /// </summary>
+        /// <returns></returns>
+        public FieldObject GetEnemyPlayerID()
+        {
+            if (gameState.currentPlayer.Equals(FieldObject.P1))
+            {
+                return FieldObject.P2;
+            }else if (gameState.Equals(FieldObject.P2))
+            {
+                return FieldObject.P1;
+            }
+
+            return gameState.currentPlayer;
+        }
+
+        /// <summary>
         /// 自身のゴーストのリストを取得する
         /// </summary>
         /// <returns>

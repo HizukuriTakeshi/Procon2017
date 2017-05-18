@@ -393,7 +393,7 @@ namespace Geister.GameSystem
                     g.P.Row = 5 - g.P.Row;
                     g.P.Col = 5 - g.P.Col;
                     g.InitPos.Row = 5 - g.InitPos.Row;
-                    g.InitPos.Row = 5 - g.InitPos.Row;
+                    g.InitPos.Col = 5 - g.InitPos.Col;
                     //Console.WriteLine(g.P.X + " " + g.P.Y);
 
                 }
@@ -403,7 +403,7 @@ namespace Geister.GameSystem
                     g.P.Row = 5 - g.P.Row;
                     g.P.Col = 5 - g.P.Col;
                     g.InitPos.Row = 5 - g.InitPos.Row;
-                    g.InitPos.Row = 5 - g.InitPos.Row;
+                    g.InitPos.Col = 5 - g.InitPos.Col;
                     //Console.WriteLine(g.P.X + " " + g.P.Y);
                 }
                 foreach (Ghost g in tmp.P1GhostGetList)
@@ -411,7 +411,7 @@ namespace Geister.GameSystem
                     g.P.Row = 5 - g.P.Row;
                     g.P.Col = 5 - g.P.Col;
                     g.InitPos.Row = 5 - g.InitPos.Row;
-                    g.InitPos.Row = 5 - g.InitPos.Row;
+                    g.InitPos.Col = 5 - g.InitPos.Col;
                     //Console.WriteLine(g.P.X + " " + g.P.Y);
                 }
                 foreach (Ghost g in tmp.P2GhostGetList)
@@ -419,7 +419,7 @@ namespace Geister.GameSystem
                     g.P.Row = 5 - g.P.Row;
                     g.P.Col = 5 - g.P.Col;
                     g.InitPos.Row = 5 - g.InitPos.Row;
-                    g.InitPos.Row = 5 - g.InitPos.Row;
+                    g.InitPos.Col = 5 - g.InitPos.Col;
                     //Console.WriteLine(g.P.X + " " + g.P.Y);
                 }
 
