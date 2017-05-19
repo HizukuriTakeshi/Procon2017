@@ -324,6 +324,7 @@ namespace Geister.GameSystem
             else
                 if (p1score < p2score)
             {
+                
                 gamestate.Winner = FieldObject.P2;
             }
             else

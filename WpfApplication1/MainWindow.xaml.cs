@@ -111,7 +111,7 @@ namespace Geister
             }
             else if (gameManager.gamestate.Flag)
             {
-                Result.Text =  " Draw...";
+                Result.Text = " Draw...";
             }
         }
 
@@ -451,26 +451,18 @@ namespace Geister
             {
                 if (gt == GhostType.P1good)
                 {
-                    ghost14.Width = 30;
-                    ghost14.Width = 30;
                     set14(460, -120);
                 }
                 if (gt == GhostType.P1evil)
                 {
-                    ghost18.Width = 30;
-                    ghost18.Width = 30;
                     set18(460, -60);
                 }
                 if (gt == GhostType.P2good)
                 {
-                    ghost24.Width = 30;
-                    ghost24.Width = 30;
                     set24(460, 40);
                 }
                 if (gt == GhostType.P2evil)
                 {
-                    ghost28.Width = 30;
-                    ghost28.Width = 30;
                     set28(460, 100);
                 }
             }
@@ -478,26 +470,18 @@ namespace Geister
             {
                 if (gt == GhostType.P1good)
                 {
-                    ghost13.Width = 30;
-                    ghost13.Width = 30;
                     set13(480, -120);
                 }
                 if (gt == GhostType.P1evil)
                 {
-                    ghost17.Width = 30;
-                    ghost17.Width = 30;
                     set17(480, -60);
                 }
                 if (gt == GhostType.P2good)
                 {
-                    ghost23.Width = 30;
-                    ghost23.Width = 30;
                     set23(480, 40);
                 }
                 if (gt == GhostType.P2evil)
                 {
-                    ghost27.Width = 30;
-                    ghost27.Width = 30;
                     set27(480, 100);
                 }
             }
@@ -505,26 +489,18 @@ namespace Geister
             {
                 if (gt == GhostType.P1good)
                 {
-                    ghost12.Width = 30;
-                    ghost12.Width = 30;
                     set12(500, -120);
                 }
                 if (gt == GhostType.P1evil)
                 {
-                    ghost16.Width = 30;
-                    ghost16.Width = 30;
                     set16(500, -60);
                 }
                 if (gt == GhostType.P2good)
                 {
-                    ghost22.Width = 30;
-                    ghost22.Width = 30;
                     set22(500, 40);
                 }
                 if (gt == GhostType.P2evil)
                 {
-                    ghost26.Width = 30;
-                    ghost26.Width = 30;
                     set26(500, 100);
                 }
             }
@@ -532,26 +508,18 @@ namespace Geister
             {
                 if (gt == GhostType.P1good)
                 {
-                    ghost11.Width = 30;
-                    ghost11.Width = 30;
                     set11(520, -120);
                 }
                 if (gt == GhostType.P1evil)
                 {
-                    ghost15.Width = 30;
-                    ghost15.Width = 30;
                     set15(520, -60);
                 }
                 if (gt == GhostType.P2good)
                 {
-                    ghost21.Width = 30;
-                    ghost21.Width = 30;
                     set21(520, 40);
                 }
                 if (gt == GhostType.P2evil)
                 {
-                    ghost25.Width = 30;
-                    ghost25.Width = 30;
                     set25(520, 100);
                 }
             }
