@@ -71,7 +71,8 @@
             <TextBlock Name="count4" Text="Player 2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0" FontSize="13"/>
             <TextBlock Name="count5" Text="good" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,220,0,0" FontSize="10"/>
             <TextBlock Name="count6" Text="evil" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,250,0,0" FontSize="10"/>
-            <TextBlock x:Name="Result" HorizontalAlignment="Left" Margin="57,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="49" Width="96" FontSize="24"/>
+            <TextBlock x:Name="Result" HorizontalAlignment="Center" Margin="5,280,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="49" Width="190" FontSize="24" TextAlignment="Center"/>
+            <TextBlock x:Name="ScoreText" HorizontalAlignment="Center" Margin="5,329,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="190" FontSize="16"/>
         </Grid>
 
         <Grid Name="ghostlayer" Height="400" Width="600" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,8,0,7">

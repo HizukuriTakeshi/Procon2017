@@ -107,11 +107,16 @@ namespace Geister
             if (gameManager.gamestate.Winner != FieldObject.blank)
             {
                 Result.Text = gameManager.gamestate.Winner.ToString() + " Win!";
-
+                if (gameManager.gamestate.Flag)
+                {
+                    ScoreText.Text = "P1 Score (" + gameManager.gamestate.P1score+ ")  P2 Score (" + gameManager.gamestate.P2score+")";
+                    Console.WriteLine("{0} Win! (higher Score than enemy)", gameManager.gamestate.Winner);
+                }
             }
             else if (gameManager.gamestate.Flag)
             {
                 Result.Text = " Draw...";
+                ScoreText.Text = "P1 Score (" + gameManager.gamestate.P1score + ")  P2 Score (" + gameManager.gamestate.P2score + ")";
             }
         }
 

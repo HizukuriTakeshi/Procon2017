@@ -106,7 +106,7 @@ namespace Geister.GameSystem
 
             this.processFPS = fps;
 
-            gamestate = new GameState(P1.InitialPlacement, P2.InitialPlacement);
+            gamestate = new GameState(P1.InitialPlacement, P2.InitialPlacement, FinalTurn);
         }
         #endregion
 
@@ -271,7 +271,7 @@ namespace Geister.GameSystem
 
             //forループ後も行われる．
             //出口での勝利はremoveされるため
-            if (count == FinalTurn)
+            if (count >= FinalTurn)
             {
                 gamestate.Flag = true;
                 OverTurn();
@@ -316,6 +316,9 @@ namespace Geister.GameSystem
 
             p1score = 2 * (p1gnum - p2gnum) - (p1enum - p2enum);
             p2score = 2 * (p2gnum - p1gnum) - (p2enum - p1enum);
+
+            gamestate.P1score = p1score;
+            gamestate.P2score = p2score;
 
             if (p1score > p2score)
             {

@@ -316,6 +316,17 @@ namespace Geister.GameInformation
         }
 
         /// <summary>
+        /// 最終ターンを取得する
+        /// </summary>
+        /// <returns>
+        /// ゲーム終了の最終ターン数
+        /// </returns>
+        public int GetFinalTurn()
+        {
+            return gameState.FinalTurn;
+        }
+
+        /// <summary>
         /// ゴーストの初期配置を設定するメソッド
         /// </summary>
         /// <remarks>

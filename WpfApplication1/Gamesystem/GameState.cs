@@ -24,8 +24,6 @@ namespace Geister.GameSystem
         private GhostType[,] board = new GhostType[6, 6];
         private FieldObject[,] boardState = new FieldObject[6, 6];
 
-    
-
         private List<Ghost> p1GhostList = new List<Ghost>();
         private List<Ghost> p2GhostList = new List<Ghost>();
 
@@ -40,6 +38,9 @@ namespace Geister.GameSystem
         private const int THINKTIME = 1000;
         private int turnNum = 1;
         private FieldObject winner = FieldObject.blank;
+        private int p1score = 0;
+        private int p2score = 0;
+        private int finalTurn = 0;
 
         #endregion
 
@@ -164,7 +165,23 @@ namespace Geister.GameSystem
             get; set;
         } = false;
 
+        public int FinalTurn
+        {
+            get { return this.finalTurn; }
+            set { this.finalTurn = value; }
+        }
 
+        public int P1score
+        {
+            get { return this.p1score; }
+            set { this.p1score = value; }
+        }
+
+        public int P2score
+        {
+            get { return this.p2score; }
+            set { this.p2score = value; }
+        }
         #endregion
 
         #region [コンストラクタ]
@@ -173,9 +190,10 @@ namespace Geister.GameSystem
         /// </summary>
         /// <param name="gtArray_1">1Pのゴースト初期配置</param>
         /// <param name="gtArray_2">2Pのゴースト初期配置</param>
-        public GameState(GhostAttribute[,] gtArray_1, GhostAttribute[,] gtArray_2)
+        public GameState(GhostAttribute[,] gtArray_1, GhostAttribute[,] gtArray_2, int finalTurn)
         {
 
+            FinalTurn = finalTurn;
             //1Pは下側
             for (int i = 0; i < gtArray_1.GetLength(0); i++)
             {
